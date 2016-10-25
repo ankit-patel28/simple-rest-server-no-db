@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>OiSYS Application</title>
+		<link rel="stylesheet" type="text/css" href="style1.css">
+		<script src="jquery-3.1.0.js"></script>
+	</head>
+	<body>
+		<div id="header">
+			<!--<header id="headerhead">
+				<h1>Ankit Work</h1>				
+			</header>-->
+			<nav id="headernav">
+				<img id="logo" src="images/logo.jpg" alt="logo">
+				<ul id="headernav1">
+					<li class="header-nav-list"><a href="index.html">Home</a></li>
+					<li class="header-nav-list"><a href="#">Tutorial</a></li>
+					<li class="header-nav-list"><a href="task.html">Task</a></li>
+					<li class="header-nav-list"><a href="#">About US</a></li>
+					<li class="header-nav-list"><a href="#">Contact US</a></li>
+				<ul>
+			</nav>
+		</div>
+		<div id=body>
+			<h1 class="h1_contact">Contact US</h1>
+			<div id="signin_div">
+				<form id="signin_form" action="/users" method="post">
+					<fieldset id="signin_fieldset" style="width:300px;height:150px">
+						<legend><b>Sign In</b></legend>
+						<table id="signin_table">
+							<tr>
+								<td>User Name:</td><td><input type="text" name="username"><td>
+							</tr>
+							<tr>
+								<td>Password:</td><td><input type="password" name="password"></td>
+							</tr>
+							<tr>
+								<td colspan="2"><input type="submit" onclick="loadDoc()" id="loginButton" value="Login In" style="background-color:#65BF95;border-radius:15px;margin-left:20px"></td>
+							</tr>
+						</table>	
+					</fieldset>
+				</form>
+				<form id="signin_form" >
+					<fieldset id="signin_fieldset" style="width:300px;height:150px">
+						<legend><b>Sign In</b></legend>
+						<table id="signin_table">
+							<tr>
+								<td>User Name:</td><td><input id="username2" type="text" name="username"><td>
+							</tr>
+							<tr>
+								<td>Password:</td><td><input id="password2"type="password" name="password"></td>
+							</tr>
+							<tr>
+								<td colspan="2"><input type="submit" onclick="loadDoc()" id="loginButton2" value="Login In" style="background-color:#65BF95;border-radius:15px;margin-left:20px"></td>
+							</tr>
+						</table>	
+					</fieldset>
+				</form>
+				<div id="change"><button type="button" id="welcome">Press The Button</button></div>
+				<div id="change1"></div>
+			</div>
+			<div id="signup_div">
+				<form id="signup_form">
+					<fieldset id="signup_fieldset">
+						<legend><b>Create Account</b></legend>
+						<table id="signup_table">
+							<tr>
+								<td>Valid Email Address : </td><td><input type="text" name="username"><td>
+							</tr>
+							<tr>
+								<td>Confirm Email : </td><td><input type="password" name="password"></td>
+							</tr>
+							<tr>
+								<td>Username : </td><td><input type="password" name="password"></td>
+							</tr>
+							<tr>
+								<td>Password : </td><td><input type="password" name="password"></td>
+							</tr>
+							<tr>
+								<td>Confirm Password : </td><td><input type="password" name="password"></td>
+							</tr>
+							<tr>
+								<td>Country : </td><td><input type="password" name="password"></td>
+							</tr>
+							<tr>
+								<td>Gender : </td><td><input type="password" name="password"></td>
+							</tr>
+							<tr>
+								<td>Date Of Birth : </td><td><input type="password" name="password"></td>
+							</tr>
+							<tr>
+								<td><input type="submit" value="Sign Up" style="background-color:#65BF95;border-radius:10px;width:100px"></td>
+								<td><input type="reset" style="background-color:#65BF95;border-radius:10px;width:100px"></td>
+							</tr>
+						</table>	
+					</fieldset>
+				</form>
+			</div>	
+			<div id="signinform_output">
+				<h1>Change the content
+				</h1>
+			</div>	
+		</div>
+		<div id="footer">
+		</div>
+		
+	</body>
+	<script>
+	$(document).ready(function(){
+		$("#loginButton2").click(function(){
+			var a=$("#username2").val();
+			var b=$("#password2").val();
+			
+			$.post("/users",
+			{
+			  username: a,
+			  password: b
+			},
+			function(data,status){
+				
+				alert("username: " + data.username + "\npassword: "+ data.password +"\nStatus: " + status);	
+				
+			});	
+			$.get("/users",function(data){
+					
+					console.log(data);
+				});
+					
+		});
+	});	
+	/*
+	$(document).ready(function(){
+		$("button").click(function(){
+			$("#change1").load("ankit.txt #p1", function(responseTxt, statusTxt, xhr){
+				if(statusTxt == "success")
+				alert("External content loaded successfully!");
+				if(statusTxt == "error")
+				alert("Error: " + xhr.status + ": " + xhr.statusText);
+			});
+		});
+	});*/
+	  /*  //var lgiBttn = document.getElementById("loginButton");
+		//lgiBttn.addEventListener("click",loadDoc);
+			function loadDoc(event){
+			    //console.log(event);
+			    //event.preventDefault();
+				
+				
+				var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+					var x=this.responseText;
+					console.log(x);
+					 document.getElementById("signinform_output").innerHTML = x;
+					}
+				  };
+				  xhttp.open("GET", "/users", true);
+				  xhttp.send();
+			
+			}*/
+	</script>
+</html>

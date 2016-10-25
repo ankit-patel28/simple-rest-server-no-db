@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>OiSYS Application</title>
+		<link rel="stylesheet" type="text/css" href="ajaxstyle.css">
+		<script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+	</head>
+	<body>
+		<div id="header">
+			<!--<header id="headerhead">
+				<h1>Ankit Work</h1>				
+			</header>-->
+			<nav id="headernav">
+				<img id="logo" src="images/logo.jpg" alt="logo">
+				<ul id="headernav1">
+					<li class="header-nav-list"><a href="index.html">Home</a></li>
+					<li class="header-nav-list"><a href="#">Tutorial</a></li>
+					<li class="header-nav-list"><a href="task.html">Task</a></li>
+					<li class="header-nav-list"><a href="#">About US</a></li>
+					<li class="header-nav-list"><a href="#">Contact US</a></li>
+				<ul>
+			</nav>
+		</div>
+		<div id=body>
+			
+			<div id="signin_div">
+				<form class="signin_form" action="/users" method="post">
+					<fieldset class="signin_fieldset" style="width:300px;height:150px">
+						<legend><b>Sign In</b></legend>
+						<table class="signin_table">
+							<tr>
+								<td>User Name:</td><td><input type="text" name="username"><td>
+							</tr>
+							<tr>
+								<td>Password:</td><td><input type="password" name="password"></td>
+							</tr>
+							<tr>
+								<td colspan="2"><input type="submit" onclick="loadDoc()" id="loginButton" value="Login In" style="background-color:#65BF95;border-radius:15px;margin-left:20px"></td>
+							</tr>
+						</table>	
+					</fieldset>
+				</form>
+				<form class="signin_form" >
+					<fieldset class="signin_fieldset" style="width:300px;height:150px">
+						<legend><b>Sign In</b></legend>
+						<table class="signin_table">
+							<tr>
+								<td>User Name:</td><td><input id="username2" type="text" name="username"><td>
+							</tr>
+							<tr>
+								<td>Password:</td><td><input id="password2"type="password" name="password"></td>
+							</tr>
+							<tr>
+								<td colspan="2"><input type="submit"  id="loginButton2" value="Login In" style="background-color:#65BF95;border-radius:15px;margin-left:20px"></td>
+							</tr>
+						</table>	
+					</fieldset>
+				</form>
+				<form class="signin_form" >
+					<fieldset class="signin_fieldset" style="width:300px;height:150px">
+						<legend><b>Sign In</b></legend>
+						<table class="signin_table">
+							<tr>
+								<td>User Name:</td><td><input id="username3" type="text" name="username"><td>
+							</tr>
+							<tr>
+								<td>Password:</td><td><input id="password3"type="password" name="password"></td>
+							</tr>
+							<tr>
+								<td colspan="2"><input type="button" onclick="loadDoc()" id="loginButton3" value="Login In" style="background-color:#65BF95;border-radius:15px;margin-left:20px"></td>
+							</tr>
+						</table>	
+					</fieldset>
+				</form>
+		</div>
+		<div id="signinform_output">
+			<h1>Change the content
+			</h1>
+		</div>	
+	</body>
+	<script>				
+	
+		$(document).ready(function(){
+		$(".signin_table").on("click","#loginButton2",function(e){
+		    e.preventDefault();
+		    console.log("ff");
+			var a=$("#username2").val();
+			var b=$("#password2").val();
+			
+			$.post("/users",
+			{
+			  username: a,
+			  password: b
+			},
+			function(data,status){
+				
+				alert("username: " + data.username + "\npassword: "+ data.password +"\nStatus: " + status);	
+				if(status=="success"){
+				$.get("/users",function(data){
+					var x=data;
+					alert(console.log(x[0].username));
+					for (var i=0; i<x.length; i++){
+						$("#signinform_output").append("<p> <b>UserName :</b>"+ x[i].username + "<b> Password :</b> " + x[i].password +"</p><hr/>");
+					}
+				});
+					
+				}
+			});	
+			
+		});
+	});	
+	
+		function loadDoc(){
+			    //console.log(event);
+			    //event.preventDefault();
+			var a=document.getElementById("username3");
+			var b=document.getElementById("password3");
+			var z="/users?username="+a.value+"&password="+b.value;
+				console.log(a.value);	
+				console.log(z);
+				
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					var x=this.responseText;
+					console.log(x);
+					var obj=JSON.parse(x);
+					console.log(obj.length);
+					for(var i = 0 ; i < obj.length ; i++){
+						var para = document.createElement("p");
+						var node = document.createTextNode("Username : " + obj[i].username + " Password: " +obj[i].password);
+						para.appendChild(node);
+					    var element = document.getElementById("signinform_output");
+						element.appendChild(para);
+						
+					}
+					
+					
+					
+				}
+				};
+				
+				
+				xhttp.open("GET", "/users?username="+a+"&password="+b, true);
+				xhttp.send();
+			
+		}
+	</script>	
+	
+
+</html>	
+				
+			

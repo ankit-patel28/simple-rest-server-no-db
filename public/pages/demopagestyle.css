@@ -1,0 +1,215 @@
+
+body{
+	width:762px;
+	margin:auto;
+	margin-top:20px;
+	margin-bottom:-20px;
+	border:2px solid #A5A2A5;
+	padding:0;
+	
+}
+/*header*/
+
+#header{
+	background-color:#4279A5;
+	height:140px;
+	/*position:relative;*/
+}
+
+
+header{
+	height:109px;
+	border-top:1px solid white;
+	border-left:1px solid white;
+	border-right:1px solid white;
+	
+}
+
+#heade nav{
+	height:30px;
+}
+
+#headernav{
+	height:28px;
+	list-style-type:none;
+	text-align:center;
+	margin:0;
+	padding:0;
+	background-color:#528ABD;
+	
+	border:1px solid white;
+	/*position:fixed;*/
+	
+}
+
+.headernavlist a{
+	height:18px;
+	text-align:center;
+	display:block;
+	text-decoration:none;
+	padding:5px 16px;
+	color:white;
+	border-right:1px solid white;
+	width:100px;
+
+	/*background-color:#528ABD;*/
+}
+
+.headernavlist{
+	float:left;
+	text-align:center;
+	overflow:hidden;
+}
+
+/*#navclear{
+	clear: both;
+}*/
+
+li#active{
+	background-color:#84B2DE;
+}
+
+.headernavlist a:hover{
+	background-color:#84B2DE;
+}
+
+
+/*body*/
+
+#body{
+	height:650px;
+	border:solid red;
+	
+}
+
+#section{
+	width:75%;
+	
+	float:left;
+}
+
+#aside{
+	width:25%;
+	float:left;
+	
+	
+}
+/*section1*/
+#section1{
+	height:200px;
+	
+	
+
+}
+
+#section1h1{
+	margin:0;
+}
+
+#section12{
+	background-color:#E7D9AC;
+	border-left:5px solid #C42C21;
+	margin-left:20px;
+	margin-right:20px;	
+	margin-bottom:20px;
+	margin-top:20px;
+	
+	
+}
+
+/*section2*/
+
+#section2{
+	height:450px;
+	
+	
+}
+
+#section21{
+	width:254px;
+	border:1px solid #C6C3C6;
+	background-color:#FFFBFF;
+	height:370;
+	float:left;
+	margin:20px;
+	
+}
+
+pre{
+	margin-left:-350px;
+	
+}
+
+#section22{
+	width:41%;
+	float:left;
+	padding-left:20px;
+	
+}
+#section23{
+	clear:both;
+}
+/*aside*/
+
+#asidenote{
+	border:1px solid #C6C3C6;
+	height:168px;
+	margin-top:20px;
+	margin-right:20px;
+	padding-left:10px;
+	
+	padding-bottom:12px;
+	
+	width:158;
+	background-color:#FFFBFF;
+}
+
+#asidenote1{
+	margin-top:12px;
+}
+#asidenav{
+	list-style-type:none;
+	margin:0;
+	padding:0;
+	text-align:center;
+	
+}
+
+.asidenavlist a{
+	text-decoration:none;
+	
+}
+
+#asidenav a:hover{
+	background-color:#84B2DE;
+}
+
+#asidenav a:active{
+	background-color:#84B2DE;
+}
+
+#asidenav2{
+	list-style-type:none;
+	
+}
+
+#asideform{
+	padding:20px;
+}
+
+#bodyclear{
+	clear:both;
+}
+
+/* footer*/
+
+#footer{
+	background-color:#4279A5;
+	height:35px;
+	border:1px solid white;
+	
+}
+
+footer{
+	margin-top:0;
+}

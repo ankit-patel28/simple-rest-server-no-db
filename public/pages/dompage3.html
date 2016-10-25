@@ -1,0 +1,257 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="domstyle3.css">
+</head>
+<body>
+	<div id="form">
+		<div id="form1">
+			<form>
+				<ul id="fruitlist">
+				<li class="flist"><input type="checkbox" name="apple" value="apple" class="fname">Apple</li> 
+				<li class="flist"><input type="checkbox" name="mengo" value="mengo" class="fname">Mengo</li>
+				<li class="flist"><input type="checkbox" name="grape" value="grape" class="fname">Grape</li> 
+				<li class="flist"><input type="checkbox" name="strawberry" value="strawberry" class="fname">Strawberry</li> 
+				<li class="flist"><input type="checkbox" name="cherry" value="cherry" class="fname">Cherry</li> 
+				<li><button id="additem" type="button">ADD Item</button></li>
+				</ul>
+			</form>
+		</div>
+		<div id="form2">
+			
+			<!-- <p id="output2">
+			</p> onclick="displayfunction3(this);event.stopPropagation();"-->
+		</div>
+		<div id="form3">
+		</div>
+	</div>
+	<div id="formdiv2">
+		<div id="div2form1">
+		<form>
+			<ul id="fruitlist1">
+			<li><input type="checkbox" name="apple" value="apple">apple</li>
+			<li><input type="checkbox" name="mengo" value="mengo">mengo</li>
+			<li><input type="checkbox" name="grape" value="grape">grape</li>
+			<li><input type="checkbox" name="strawberry" value="strawberry">strawberry</li>
+			<li><input type="checkbox" name="cherry" value="cherry">cherry</li>
+			<li><button type="button">Add Fruit</button></li>
+			</ul>
+		</div>
+		<div id="div2form2">
+			
+		</div>
+		<div id="div2form3">
+		</div>		
+		</form>
+	</div>
+<script>
+
+var a=document.getElementsByClassName("flist").length;
+for(i=0;i<a;i++){
+document.getElementsByClassName("flist")[i].addEventListener("click",displayfunction4);
+
+}
+var b=document.getElementsByClassName("fname").length;
+console.log(b);
+for(i=0;i<b;i++){
+document.getElementsByClassName("fname")[i].addEventListener("click",displayfunction5);
+}
+document.getElementById("additem").addEventListener("click",addfruit);
+console.log(a);
+function displayfunction(x){
+	var i=0;
+	var y=[];
+	if(x.checked==true){
+	y[i]=document.getElementById("output");
+	y[i].innerHTML = x.value + "</br>";
+	i++;
+	
+	}
+	else{
+	document.getElementById("output").innerHTML = " ";
+	}
+}
+
+function displayfunction2(y){
+	var x=document.forms[0];
+	var i=0;
+	var text=" ";
+	document.getElementById("output2").innerHTML=" ";
+	for(i=0; i<x.length;i++){
+		if(x[i].checked==true){
+		text+=x[i].value + "</br></br>";
+		document.getElementById("output2").innerHTML=text;
+		}
+	}	
+	
+
+}
+
+
+//event attach in formdiv2
+
+document.getElementById("formdiv2").addEventListener("click",eventhandlefuction);
+
+function eventhandlefuction(event){
+	console.log(this);
+	var x=event.target;
+	console.log(x.tagName);
+	var a="LI";
+	var b="INPUT";
+	var c="BUTTON"
+	if(x.tagName==a){
+		console.log(x.firstChild.checked);
+		if(x.firstChild.checked==true){
+			x.firstChild.checked=0;
+			addelement(x.firstChild);
+		}
+		else{
+			x.firstChild.checked=1;
+			addelement(x.firstChild);
+		}
+	}
+	else if(x.tagName==b){
+        addelement(x);		
+	}
+	else if(x.tagName==c){
+		addfruit1();
+	
+	}
+	
+	
+} 
+
+function addfruit1(){
+	var fruitname=prompt("Please Enter Fruit Name","banana");
+	console.log(fruitname);
+	var fruitul=document.getElementById("fruitlist1");
+	var li=document.createElement("li");
+	fruitul.appendChild(li);
+	var 
+	first=fruitul.firstChild;
+	fruitul.insertBefore(li,first);
+	var input=document.createElement("input");
+	input.setAttribute("type","checkbox");
+	input.setAttribute("name",fruitname);
+	input.setAttribute("value",fruitname);
+	var t=document.createTextNode(fruitname);
+	console.log(t);
+	li.appendChild(input);
+	li.appendChild(t);
+	
+	
+
+}
+
+
+
+function addelement(x){
+	
+	if(x.checked==true){
+		var main=document.getElementById("div2form2");
+		var p=document.createElement("p")
+		var t=document.createTextNode(x.value)
+		p.appendChild(t)
+		main.appendChild(p);
+		}
+	else{
+		var div=document.getElementById("div2form2");
+		console.log(div);
+		var num=div.childNodes.length;
+		var list=div.childNodes;
+		console.log(num);
+		for(i=0;i<num;i++){
+		
+		if(x.value==list[i].innerHTML){
+		 div.removeChild(list[i]);
+		}
+		 
+			}
+	}
+
+}
+//----------------------
+
+
+
+
+function addfruit(){
+	var fruitname=prompt("Please Enter Fruit Name","banana");
+	console.log(fruitname);
+	var fruitul=document.getElementById("fruitlist");
+	var li=document.createElement("li");
+	li.setAttribute("class", "flist");
+	fruitul.appendChild(li);
+	var first=fruitul.firstChild;
+	fruitul.insertBefore(li,first);
+	var input=document.createElement("input");
+	input.setAttribute("type","checkbox");
+	input.setAttribute("name",fruitname);
+	input.setAttribute("value",fruitname);
+	input.setAttribute("class","fname");
+	var t=document.createTextNode(fruitname);
+	console.log(t);
+	li.appendChild(input);
+	li.appendChild(t);
+	
+	input.addEventListener("click",displayfunction5);
+	li.addEventListener("click",displayfunction4);
+
+	
+
+}
+
+function displayfunction4(){
+	console.log(this);
+	
+	if(this.firstChild.checked==true){
+         console.log(this.firstChild.value);
+		 this.firstChild.checked=0;
+		 displayfunction3(this.firstChild);
+		 }
+	else{
+		this.firstChild.checked=1;
+		displayfunction3(this.firstChild);
+	}	 
+}
+
+function displayfunction5(){
+	event.stopPropagation();
+	console.log(this);
+	displayfunction3(this);
+   
+}
+
+
+
+function displayfunction3(x){
+	
+	if(x.checked==true){
+		var main=document.getElementById("form2");
+		var p=document.createElement("p")
+		var t=document.createTextNode(x.value)
+		p.appendChild(t)
+		main.appendChild(p);
+		}
+	else{
+		var div=document.getElementById("form2");
+		console.log(div);
+		var num=div.childNodes.length;
+		var list=div.childNodes;
+		console.log(num);
+		for(i=0;i<num;i++){
+		
+		if(x.value==list[i].innerHTML){
+		 div.removeChild(list[i]);
+		}
+		 
+			}
+	}
+
+}
+
+
+
+</script>
+	
+</body>
+</html>

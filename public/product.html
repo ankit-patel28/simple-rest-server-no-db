@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Case</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script   src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Store</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Catalog</a></li>
+        <li><a href="#">ontact</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="col-sm-3">
+<div class="container-fluid">
+  <div class="list-group">
+    <a href="#" class="list-group-item active">Car</a>
+    <a href="#" class="list-group-item">AC</a>
+    <a href="#" class="list-group-item">Third item</a>
+	<a href="#" class="list-group-item">Third item</a>
+	<a href="#" class="list-group-item">Third item</a>
+  </div>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="container-fluid">
+  <form class="form-horizontal">
+    <div class="form-group">
+		
+		<label style="margin-left:0px;text-align:left" class="col-xs-2 control-label" for="serach">Search</label>
+		<div class="col-xs-3">
+		<input type="search" class="form-control" id="search" placeholder="Search By Item Name">
+		</div>
+		
+    </div>
+    <div class="form-group">
+      <label class="col-xs-2 control-label" style="margin-left:0px;text-align:left" for="item">Add item</label>
+	  <div class="col-xs-2">
+      <input type="text" name="itemname" class="form-control" id="item1" placeholder="item Name">
+	  </div>
+	  <div class="col-xs-2">
+	  <input type="text" name="description"class="form-control" id="desc1" placeholder="Description">
+	  </div>
+	  <div class="col-xs-2">
+	  <input type="text" name="price" class="form-control" id="price1" placeholder="price">
+	  </div>
+	  <button type="submit" id="add" class="btn">Add</button>
+    </div>
+  </form>
+</div>
+<div id="addproduct">
+</div>
+</div>
+  
+</body>
+<script>
+$(document).ready(function(){
+	$.get("/products",function(data){
+		var x=data;		
+		for (var i=0; i<x.length; i++){
+			$("#addproduct").prepend("<div></div>");
+			$("#addproduct").children().eq(0).addClass("well well-sm container-fluid");
+			$("#addproduct").children().eq(0).addClass("addeditem");
+						//("#addproduct").children.attr({"class":"addeditem"});
+			$(".addeditem").eq(0).append("<div> <h1>" + data[i].itemname + "</h1> <p> " + data[i].description +"</p> </div>");
+			$(".addeditem").eq(0).children().addClass("col-sm-8");
+			$(".addeditem").eq(0).append("<div><span>"+ data[i].price+"</span></div>");
+			$(".addeditem").eq(0).children().next().addClass("col-sm-2");
+			$(".addeditem").eq(0).children().next().children().addClass("label label-default");
+			$(".addeditem").eq(0).append("<a><span></span></a>");
+			$(".addeditem").eq(0).children().siblings("a").addClass("col-sm-2");
+			$(".addeditem").eq(0).children().siblings("a").attr("href","#");
+		    $(".addeditem").eq(0).children().siblings("a").attr("id",data[i].id);
+			$(".addeditem").eq(0).children().siblings("a").children().addClass("glyphicon glyphicon-remove-sign");
+		}
+	});
+});
+
+$(document).ready(function(e){
+	$("#addproduct").on("click","a",function(e){
+		var id = $(this).attr("id");
+		var obj=this;
+		$.ajax({url:"/products/"+id, type:'DELETE', success: function(result){
+			//var id = $(this).attr("id");
+			/*$.DELETE("/products/"id,function(data){
+			alert("delete item");
+			});*/
+		    alert("delete the record");
+			console.log(id);
+			console.log(obj);
+			var c=$(e.target);
+			console.log(c);
+			var d=$(obj).parent().remove();
+			console.log(d)
+		
+		}});
+	
+	});
+	
+});
+
+$(document).ready(function(){
+	$("#add").on("click",function(e){
+		
+		e.preventDefault();
+		var a=$("#item1").val();
+		var b=$("#desc1").val();
+		console.log(b);
+		var c=$("#price1").val();
+		$.post("/products",
+			{
+			  itemname: a,
+			  description: b,
+			  price: c 
+			},
+			function(data,status){
+				if(status=="success")
+					var z= $("#addproduct").children().length;
+					console.log(z);
+					if(z=="0"){
+						$("#addproduct").append("<div></div>");
+						$("#addproduct").children().addClass("well well-sm container-fluid");
+						$("#addproduct").children().addClass("addeditem");
+						//("#addproduct").children.attr({"class":"addeditem"});
+						$(".addeditem").append("<div> <h1>" + data.itemname + "</h1> <p> " + data.description +"</p> </div>");
+						$(".addeditem").children().addClass("col-sm-8");
+						$(".addeditem").append("<div><span>"+ data.price+"</span></div>");
+						$(".addeditem").children().next().addClass("col-sm-2");
+						$(".addeditem").children().next().children().addClass("label label-default");
+						$(".addeditem").append("<a><span></span></a>");
+						$(".addeditem").children().siblings("a").addClass("col-sm-2");
+						$(".addeditem").children().siblings("a").attr("href","#");
+						$(".addeditem").children().siblings("a").attr("id",data.id);
+						$(".addeditem").children().siblings("a").children().addClass("glyphicon glyphicon-remove-sign");
+					}
+					else{
+						$("#addproduct").prepend("<div></div>");
+						$("#addproduct").children().eq(0).addClass("well well-sm container-fluid");
+						$("#addproduct").children().eq(0).addClass("addeditem");
+						//("#addproduct").children.attr({"class":"addeditem"});
+						$(".addeditem").eq(0).append("<div> <h1>" + data.itemname + "</h1> <p> " + data.description +"</p> </div>");
+						$(".addeditem").eq(0).children().addClass("col-sm-8");
+						$(".addeditem").eq(0).append("<div><span>"+ data.price+"</span></div>");
+						$(".addeditem").eq(0).children().next().addClass("col-sm-2");
+						$(".addeditem").eq(0).children().next().children().addClass("label label-default");
+						$(".addeditem").eq(0).append("<a><span></span></a>");
+						$(".addeditem").eq(0).children().siblings("a").addClass("col-sm-2");
+						var d=$(".addeditem").eq(0).children().siblings("a");
+						console.log(d);
+						$(".addeditem").eq(0).children().siblings("a").attr("href","#");
+						$(".addeditem").eq(0).children().siblings("a").attr("id",data.id);
+						$(".addeditem").eq(0).children().siblings("a").children().addClass("glyphicon glyphicon-remove-sign");
+					
+					
+					
+					}
+					
+				alert("Item name: " + data.itemname + "\description: "+ data.description +"\nStatus: " + status);	
+				//if(status=="success"){
+				//$.get("/users",function(data){
+				//var x=data;
+				$("#item1").val(" ");
+				$("#desc1").val(" ");
+				$("#price1").val(" ");
+				
+			});	
+	});
+
+});
+</script>

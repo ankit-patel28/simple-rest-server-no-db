@@ -1,0 +1,188 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="jquerystyle4.css">
+<script src="jquery-3.1.0.js"></script>
+</head>
+
+<body>
+	<div id="formdiv2">
+		<div id="div2form1">
+		<form>
+			<ul id="fruitlist1">
+				<li><input type="checkbox" name="apple" value="apple">apple</li>
+				<li><input type="checkbox" name="mengo" value="mengo">mengo</li>
+				<li><input type="checkbox" name="grape" value="grape">grape</li>
+				<li><input type="checkbox" name="strawberry" value="strawberry">strawberry</li>
+				<li><input type="checkbox" name="cherry" value="cherry">cherry</li>
+				<li><button type="button">Add Fruit</button></li>
+			</ul>
+		</div>
+		<div id="div2form2">
+			
+		</div>
+		<div id="div2form3">
+		</div>		
+		</form>
+	</div>
+<script>
+/*
+$(document).ready(function(){
+	$("#fruitlist1").on("click","li",function(event){
+	console.log(this)
+	var a = $(this).find("input").prop("checked");
+	//if(event.target==this || a==true){
+		
+	      
+	
+	//}
+	
+		
+	console.log(a);
+	if(a==true){
+		$("#div2form2").append("<p>"+ $(this).text() + "<p>");
+		}
+	else{
+	
+		var p=$("#div2form2").children();
+	    console.log($("p").eq(0));
+		for(i=0;i<p.length;i++){
+			if($(this).text()==$("p").eq(i).text()){
+				console.log($("#div2form2").children().eq(i));
+				console.log(i);
+				console.log($("#div2form2").children().eq(i).remove());
+			}
+		
+		}
+			
+	}
+	    
+	 
+	 });
+	 
+});	 */
+
+$(document).ready(function(event){
+	$("#fruitlist1").on("click","li",function(event){
+	console.log(event.target);
+	console.log(this.firstChild);
+	var a = $(this).find("input").prop("checked");
+	if(this==event.target){
+		console.log($(this).find("input").prop("checked"));
+		if($(this).find("input").prop("checked")==true){
+			console.log($(this).find("input").prop("checked"));
+			$(this).find("input").prop("checked",false);
+			
+			var b=$(this).find("input");
+			checkbox.call(b);
+		}
+		else{
+			console.log($(this).find("input").prop("checked"));
+			$(this).find("input").prop("checked",true);
+			var b=$(this).find("input");
+			checkbox.call(b);
+		}
+	}	
+	else if(event.target==this.firstChild){
+		console.log(this.firstChild);
+		//var b = this.firstChild;
+		console.log(b);
+		checkbox.call(this.firstChild);
+	}
+	else if(event.target==this.firstChild){
+		var b=this.firstChild;
+		addfruit.call(b);
+	}
+	
+	});
+});
+
+function addfruit(){
+	var fruitname=prompt("Please Enter Fruit Name","banana");
+	//$("#div2form2").
+	
+}
+
+function checkbox(){
+	console.log(this);
+	console.log($(this).prop("checked"));
+	if($(this).prop("checked")==true){
+		$("#div2form2").append("<p>"+ $(this).val() + "<p>");
+		}
+	else{
+	
+		var p=$("#div2form2").children();
+	    console.log($("p").eq(0));
+		for(i=0;i<p.length;i++){
+			if($(this).val()==$("p").eq(i).text()){
+				console.log($("#div2form2").children().eq(i));
+				console.log(i);
+				console.log($("#div2form2").children().eq(i).remove());
+			}
+		
+		}
+			
+	}
+}
+
+
+	 //$("this")
+	 
+	 /*
+
+$(document).ready(function(){
+	$("#div2form1").on("click","#fruitlist1",function(event){
+	 console.log(this);
+	 var a=event.target;
+	 console.log(a.tagName);
+	if(a.tagName=="LI"){
+		//var b=$("a").children();
+		//console.log(b);
+		console.log(a.children());
+		if(a.children().checked==true){
+			a.children().checked=0;
+			addelement(x.firstChild);
+		}
+		else{
+			x.firstChild.checked=1;
+			addelement(x.firstChild);
+		}
+	}
+	else if(x.tagName==b){
+        addelement(x);		
+	}
+	else if(x.tagName==c){
+		addfruit1();
+	
+	}	 
+	});
+});
+
+function addelement(x){
+	
+	if(x.checked==true){
+		var main=document.getElementById("div2form2");
+		var p=document.createElement("p")
+		var t=document.createTextNode(x.value)
+		p.appendChild(t)
+		main.appendChild(p);
+		}
+	else{
+		var div=document.getElementById("div2form2");
+		console.log(div);
+		var num=div.childNodes.length;
+		var list=div.childNodes;
+		console.log(num);
+		for(i=0;i<num;i++){
+		
+		if(x.value==list[i].innerHTML){
+		 div.removeChild(list[i]);
+		}
+		 
+			}
+	}
+
+}
+*/
+</script>
+</body>
+</html>

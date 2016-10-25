@@ -1,0 +1,76 @@
+#form{
+	border:1px solid black;
+	margin:auto;
+	width:800px;
+}
+
+#form1{
+	float:left;
+	width:399px;
+	border-right:1px solid black;
+}
+
+#form2{
+	float:left;
+	width:400px;
+}
+#form3{
+	clear:both;
+}
+
+form{
+	width:400px;
+	padding-top:;
+	margin:0;
+	margin-left:;
+	
+	
+}
+
+input{
+	margin-left:200px;
+	margin-top:20px;
+	margin-bottom:20px;
+	padding:500px;
+}
+
+button{
+	margin-left:200px;
+	margin-top:20px;
+	margin-bottom:20px;
+	padding:10px;
+}
+
+ul{
+	list-style-type:none;
+	margin:0;
+	padding:0;
+}
+
+li{
+	display:block;
+}
+
+/*-----------------------------------------------------*/
+
+#formdiv2{
+	margin:auto;
+	border:1px solid green;
+	width:800px;
+	margin-top:50px;
+}
+
+#div2form1{
+	float:left;
+	width:399px;
+	border-right:1px solid green;
+}
+
+#div2form2{
+	float:left;
+	width:400px;
+}
+
+#div2form3{
+	clear:both;
+}
