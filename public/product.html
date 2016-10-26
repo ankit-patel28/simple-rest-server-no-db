@@ -47,7 +47,7 @@
 </div>
 <div class="col-sm-9">
 <div class="container-fluid">
-  <form class="form-horizontal">
+  <form class="form-horizontal" id="productform">
     <div class="form-group">
 		
 		<label style="margin-left:0px;text-align:left" class="col-xs-2 control-label" for="serach">Search</label>
@@ -81,20 +81,24 @@ $(document).ready(function(){
 	$.get("/products",function(data){
 		var x=data;		
 		for (var i=0; i<x.length; i++){
-			$("#addproduct").prepend("<div></div>");
+			/*$("#addproduct").prepend("<div></div>");
 			$("#addproduct").children().eq(0).addClass("well well-sm container-fluid");
 			$("#addproduct").children().eq(0).addClass("addeditem");
 						//("#addproduct").children.attr({"class":"addeditem"});
-			$(".addeditem").eq(0).append("<div> <h1>" + data[i].itemname + "</h1> <p> " + data[i].description +"</p> </div>");
+			$(".addeditem").eq(0).append("<div> <h3>" + data[i].itemname + "</h3> <p> " + data[i].description +"</p> </div>");
 			$(".addeditem").eq(0).children().addClass("col-sm-8");
 			$(".addeditem").eq(0).append("<div><span>"+ data[i].price+"</span></div>");
 			$(".addeditem").eq(0).children().next().addClass("col-sm-2");
 			$(".addeditem").eq(0).children().next().children().addClass("label label-default");
 			$(".addeditem").eq(0).append("<a><span></span></a>");
 			$(".addeditem").eq(0).children().siblings("a").addClass("col-sm-2");
-			$(".addeditem").eq(0).children().siblings("a").attr("href","#");
+			
 		    $(".addeditem").eq(0).children().siblings("a").attr("id",data[i].id);
-			$(".addeditem").eq(0).children().siblings("a").children().addClass("glyphicon glyphicon-remove-sign");
+			$(".addeditem").eq(0).children().siblings("a").children().addClass("glyphicon glyphicon-remove-sign");*/
+			$("#addproduct").prepend('<div class="well well-sm container-fluid" class="addeditem"><div class="col-sm-8"> <h3>' +
+			data[i].itemname +'</h3> <p>' + data[i].description +'</p> </div> <div class="col-sm-2" style="margin-top:25px"><span class="label label-default">'
+			+ data[i].price+'</span></div><a  class="col-sm-2" style="margin-top:25px" id=' + data[i].id +' ><span class="glyphicon glyphicon-remove-sign"></span></a>'); 
+		
 		}
 	});
 });
@@ -108,13 +112,19 @@ $(document).ready(function(e){
 			/*$.DELETE("/products/"id,function(data){
 			alert("delete item");
 			});*/
-		    alert("delete the record");
-			console.log(id);
-			console.log(obj);
-			var c=$(e.target);
-			console.log(c);
-			var d=$(obj).parent().remove();
-			console.log(d)
+			console.log(result);
+			if(result.success==true){
+				//alert("Record Is Deleted");
+				console.log(id);
+				console.log(obj);
+				var c=$(e.target);
+				console.log(c);
+				var d=$(obj).parent().remove();
+				console.log(d)
+			}
+			else{
+				//alert("Record is not Deleted");
+				}
 		
 		}});
 	
@@ -145,14 +155,13 @@ $(document).ready(function(){
 						$("#addproduct").children().addClass("well well-sm container-fluid");
 						$("#addproduct").children().addClass("addeditem");
 						//("#addproduct").children.attr({"class":"addeditem"});
-						$(".addeditem").append("<div> <h1>" + data.itemname + "</h1> <p> " + data.description +"</p> </div>");
+						$(".addeditem").append("<div> <h3>" + data.itemname + "</h3> <p> " + data.description +"</p> </div>");
 						$(".addeditem").children().addClass("col-sm-8");
 						$(".addeditem").append("<div><span>"+ data.price+"</span></div>");
 						$(".addeditem").children().next().addClass("col-sm-2");
 						$(".addeditem").children().next().children().addClass("label label-default");
 						$(".addeditem").append("<a><span></span></a>");
 						$(".addeditem").children().siblings("a").addClass("col-sm-2");
-						$(".addeditem").children().siblings("a").attr("href","#");
 						$(".addeditem").children().siblings("a").attr("id",data.id);
 						$(".addeditem").children().siblings("a").children().addClass("glyphicon glyphicon-remove-sign");
 					}
@@ -170,7 +179,6 @@ $(document).ready(function(){
 						$(".addeditem").eq(0).children().siblings("a").addClass("col-sm-2");
 						var d=$(".addeditem").eq(0).children().siblings("a");
 						console.log(d);
-						$(".addeditem").eq(0).children().siblings("a").attr("href","#");
 						$(".addeditem").eq(0).children().siblings("a").attr("id",data.id);
 						$(".addeditem").eq(0).children().siblings("a").children().addClass("glyphicon glyphicon-remove-sign");
 					
@@ -182,9 +190,7 @@ $(document).ready(function(){
 				//if(status=="success"){
 				//$.get("/users",function(data){
 				//var x=data;
-				$("#item1").val(" ");
-				$("#desc1").val(" ");
-				$("#price1").val(" ");
+				document.getElementById("productform").reset();
 				
 			});	
 	});
